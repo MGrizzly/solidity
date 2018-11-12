@@ -162,6 +162,11 @@ public:
 	/// Do only use in error cases, they are quite expensive.
 	std::string lineAtPosition(int _position) const { return m_source.lineAtPosition(_position); }
 	std::tuple<int, int> translatePositionToLineColumn(int _position) const { return m_source.translatePositionToLineColumn(_position); }
+	std::string sourceAt(SourceLocation const& _location) const
+	{
+		solAssert(!_location.isEmpty(), "");
+		return m_source.source().substr(_location.start, _location.end - _location.start);
+	}
 	///@}
 
 private:
